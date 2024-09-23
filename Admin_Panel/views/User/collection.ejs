@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Store</title>
+    <link rel="stylesheet" href="/css/style.css"> <!-- Assuming CSS is in a public folder -->
+</head>
+<body>
+    <!-- Include Header -->
+    <%- include('header') %>
+
+    <!-- Shop Page Title and Breadcrumb -->
+    <section class="top-space-margin half-section bg-gradient-very-light-gray">
+        <div class="container">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-xl-8 col-lg-10 text-center position-relative page-title-extra-large">
+                    <h1 class="alt-font fw-600 text-dark-gray mb-10px">Shop</h1>
+                </div>
+                <div class="col-12 breadcrumb breadcrumb-style-01 d-flex justify-content-center">
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li>Shop</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="pt-0 ps-6 pe-6 lg-ps-2 lg-pe-2 sm-ps-0 sm-pe-0">
+        <div class="container-fluid">
+            <div class="row flex-row-reverse">
+                <div class="col-xxl-10 col-lg-9 ps-5 md-ps-15px md-mb-60px">
+                    <!-- Title for the selected category -->
+                 
+    
+                    <!-- Display products -->
+                    <ul id="productList" class="shop-modern shop-wrapper grid grid-4col xl-grid-3col sm-grid-2col xs-grid-1col gutter-extra-large text-center">
+                        <% if (products && products.length > 0) { %>
+                            <% products.forEach(product => { %>
+                                <li class="grid-item">
+                                    <div class="shop-box mb-10px">
+                                        <div class="shop-image mb-20px">
+                                            <a href="/products/single/<%= product._id %>">
+                                                <% if (product.images && product.images.length > 0) { %>
+                                                    <img src="/uploads/<%= product.images[0].url %>" alt="<%= product.name %>">
+                                                <% } else { %>
+                                                    <img src="https://via.placeholder.com/600x765" alt="No image available">
+                                                <% } %>
+                                                <div class="shop-overlay bg-gradient-gray-light-dark-transparent"></div>
+                                            </a>
+                                            <div class="shop-buttons-wrap">
+                                                <a href="/products/single/<%= product._id %>" class="alt-font btn btn-small btn-box-shadow btn-white btn-round-edge left-icon add-to-cart">
+                                                    <i class="feather icon-feather-shopping-bag"></i><span class="quick-view-text button-text">Add to cart</span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="shop-footer text-center">
+                                            <a href="/products/single/<%= product._id %>" class="alt-font text-dark-gray fs-19 fw-500"><%= product.name %></a>
+                                            <div class="price lh-22 fs-16">
+                                                <% if (product.originalPrice) { %>
+                                                    <del>$<%= product.originalPrice %></del>
+                                                <% } %>
+                                                $<%= product.price %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            <% }) %>
+                        <% } else { %>
+                            <div class="col-12">
+                                <p>No products found in this category.</p>
+                            </div>
+                        <% } %>
+                    </ul>
+    
+                    <!-- Pagination (if needed) -->
+                    <div class="w-100 d-flex mt-4 justify-content-center md-mt-30px">
+                        <ul class="pagination pagination-style-01 fs-13 fw-500 mb-0">
+                            <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-left fs-18 d-xs-none"></i></a></li>
+                            <li class="page-item"><a class="page-link" href="#">01</a></li>
+                            <li class="page-item active"><a class="page-link" href="#">02</a></li>
+                            <li class="page-item"><a class="page-link" href="#">03</a></li>
+                            <li class="page-item"><a class="page-link" href="#"><i class="feather icon-feather-arrow-right fs-18 d-xs-none"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <!-- Sidebar with Filters (optional) -->
+                <div class="col-xxl-2 col-lg-3 shop-sidebar">
+               
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+
+    <!-- Footer and JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <title>Crafto - The Multipurpose HTML5 Template</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="author" content="ThemeZaa">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+        <meta name="description" content="Elevate your online presence with Crafto - a modern, versatile, multipurpose Bootstrap 5 responsive HTML5, SCSS template using highly creative 48+ ready demos.">
+        <!-- favicon icon -->
+        <link rel="shortcut icon" href="images/favicon.png">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+        <!-- google fonts preconnect -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <!-- style sheets and font icons  -->
+        <link rel="stylesheet" href="css/vendors.min.css"/>
+        <link rel="stylesheet" href="css/icon.min.css"/>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/responsive.css"/>
+        <link rel="stylesheet" href="demos/fashion-store/fashion-store.css" />
+    </head>
+    <body data-mobile-nav-style="classic">
+      <!-- Start Header -->
+      <%- include('header') %>
+      <!-- End Header -->
+  
+      <!-- Start Breadcrumb Section -->
+      <section class="top-space-margin bg-gradient-very-light-gray pt-20px pb-20px ps-45px pe-45px sm-ps-15px sm-pe-15px">
+          <div class="container-fluid">
+              <div class="row align-items-center">
+                  <div class="col-12 breadcrumb breadcrumb-style-01 fs-14">
+                      <ul>
+                          <li><a href="/">Home</a></li>
+                          <li><a href="/shop">Shop</a></li>
+                          <li><%= product.name %></li>
+                      </ul>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <!-- End Breadcrumb Section -->
+  
+      <!-- Start Product Section -->
+      <section class="pt-60px pb-0 md-pt-30px">
+          <div class="container">
+              <div class="row">
+                  <!-- Product Image Section -->
+                  <div class="col-lg-7 pe-50px md-pe-15px md-mb-40px">
+                      <div class="row overflow-hidden position-relative">
+                          <div class="col-12 col-lg-10 position-relative order-lg-2 product-image ps-30px md-ps-15px">
+                              <!-- Image Slider for the Product -->
+                              <div class="swiper product-image-slider" data-slider-options='{"spaceBetween": 10, "loop": true, "autoplay": {"delay": 2000, "disableOnInteraction": false}, "watchOverflow": true, "navigation": {"nextEl": ".slider-product-next", "prevEl": ".slider-product-prev"}, "thumbs": {"swiper": {"el": ".product-image-thumb", "slidesPerView": "auto", "spaceBetween": 15, "direction": "vertical", "navigation": {"nextEl": ".swiper-thumb-next", "prevEl": ".swiper-thumb-prev"}}}}' data-thumb-slider-md-direction="horizontal">
+                                  <div class="swiper-wrapper">
+                                      <!-- Loop through the images of the single product -->
+                                      <% product.images.forEach(image => { %>
+                                      <div class="swiper-slide gallery-box">
+                                          <a href="/uploads/<%= image.url %>" data-group="lightbox-gallery" title="Product image">
+                                              <img class="w-100" src="/uploads/<%= image.url %>" alt="Product Image">
+                                          </a>
+                                      </div>
+                                      <% }); %>
+                                  </div>
+                              </div>
+                          </div>
+  
+                          <!-- Thumbnails for the product images -->
+                          <div class="col-12 col-lg-2 order-lg-1 position-relative single-product-thumb">
+                              <div class="swiper-container product-image-thumb slider-vertical">
+                                  <div class="swiper-wrapper">
+                                      <% product.images.forEach(image => { %>
+                                      <div class="swiper-slide">
+                                          <img class="w-100" src="/uploads/<%= image.url %>" alt="Product Thumbnail">
+                                      </div>
+                                      <% }); %>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+  
+                  <!-- Product Information Section -->
+                  <div class="col-12 col-lg-5 product-info">
+                      <span class="fw-500 text-dark-gray d-block">Zalando</span>
+                      <h4 class="alt-font text-dark-gray fw-500 mb-5px"><%= product.name %></h4>
+  
+                      <!-- Pricing Section -->
+                      <div class="product-price mb-10px">
+                          <span class="text-dark-gray fs-28 xs-fs-24 fw-700 ls-minus-1px">
+                              <del class="text-medium-gray me-10px fw-400">$85.00</del>$65.00
+                          </span>
+                      </div>
+  
+                      <!-- Product Description -->
+                      <p><%= product.description %></p>
+  
+                      <!-- Quantity and Add to Cart -->
+                      <div class="d-flex align-items-center flex-column flex-sm-row mb-20px position-relative">
+                          <div class="quantity me-15px xs-mb-15px order-1">
+                              <button type="button" class="qty-minus">-</button>
+                              <input class="qty-text" type="number" id="quantity" name="quantity" value="1" min="1" max="<%= product.stock %>" />
+                              <button type="button" class="qty-plus">+</button>
+                          </div>
+                          <a href="/cart" class="btn btn-cart btn-extra-large btn-switch-text btn-box-shadow btn-none-transform btn-dark-gray left-icon btn-round-edge border-0 me-15px xs-me-0 order-3 order-sm-2">
+                              <span><i class="feather icon-feather-shopping-bag"></i> Add to cart</span>
+                          </a>
+                          <a href="#" class="wishlist d-flex align-items-center justify-content-center border border-radius-5px border-color-extra-medium-gray order-2 order-sm-3">
+                              <i class="feather icon-feather-heart icon-small text-dark-gray"></i>
+                          </a>
+                      </div>
+  
+                      <!-- Shipping Information -->
+                      <div class="col-12 icon-with-text-style-08">
+                          <div class="feature-box feature-box-left-icon d-inline-flex align-middle">
+                              <div class="feature-box-icon me-10px">
+                                  <i class="feather icon-feather-truck top-8px position-relative align-middle text-dark-gray"></i>
+                              </div>
+                              <div class="feature-box-content">
+                                  <span><span class="alt-font text-dark-gray fw-500">Estimated delivery:</span> March 03 - March 07</span>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-12 icon-with-text-style-08 mb-10px">
+                          <div class="feature-box feature-box-left-icon d-inline-flex align-middle">
+                              <div class="feature-box-icon me-10px">
+                                  <i class="feather icon-feather-archive top-8px position-relative align-middle text-dark-gray"></i>
+                              </div>
+                              <div class="feature-box-content">
+                                  <span><span class="alt-font text-dark-gray fw-500">Free shipping & returns:</span> On all orders over $50</span>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </section>
+      <!-- End Product Section -->
+  
+      <!-- Start Footer -->`
+      <!-- End Footer -->
+  
+      <!-- Scripts -->
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="js/vendors.min.js"></script>
+      <script type="text/javascript" src="js/main.js"></script>
+  </body>
+  
+</html>
